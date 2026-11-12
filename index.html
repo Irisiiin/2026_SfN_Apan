@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Listening and looking in real-world conversation · Xinran Yu</title>
+<meta name="description" content="Intracranial EEG from three patients during natural conversation: APAN #124 and SfN posters, Xinran Yu, Ghuman lab, University of Pittsburgh.">
+<style>
+:root{
+  --bg:#f6f7f9; --card:#ffffff; --ink:#15181d; --muted:#5b6470; --line:#e2e5ea;
+  --accent:#1f5fd6; --accent-ink:#ffffff; --chip:#eaf0fc; --shadow:0 1px 2px rgba(20,24,30,.06),0 6px 20px rgba(20,24,30,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0f1216; --card:#181c22; --ink:#eef1f5; --muted:#9aa4b2; --line:#2a303a; --accent:#6ea2ff; --accent-ink:#0b1220; --chip:#1d2a44; --shadow:none; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 56px}
+header{padding:28px 0 8px}
+.eyebrow{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+h1{font-size:28px;line-height:1.2;margin:0 0 10px;letter-spacing:-.01em}
+.byline{color:var(--muted);font-size:14px;margin:0}
+.lead{font-size:17px;margin:16px 0 0}
+h2{font-size:21px;margin:36px 0 6px;letter-spacing:-.005em}
+h3{font-size:17px;margin:0 0 4px}
+p{margin:8px 0}
+.sub{color:var(--muted);font-size:14px;margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.tag{display:inline-block;background:var(--chip);color:var(--accent);font-weight:600;font-size:12.5px;border-radius:999px;padding:3px 10px;margin-bottom:8px}
+.card ul{margin:10px 0 0;padding-left:20px}
+.card li{margin:7px 0}
+.thumb{display:block;margin:14px 0 4px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.thumb img{display:block;width:100%;height:auto}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{display:inline-block;text-decoration:none;font-weight:600;font-size:14.5px;border-radius:10px;padding:9px 14px;background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
+.link-line{border-left:3px solid var(--accent);padding:2px 0 2px 12px;margin:18px 0;color:var(--ink)}
+.more{margin-top:34px;padding:14px 16px;border:1px dashed var(--line);border-radius:14px;text-align:center;color:var(--muted);font-size:15px}
+.more a{color:var(--accent);font-weight:600;text-decoration:none}
+nav.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+nav.chips a{font-size:14px;text-decoration:none;color:var(--accent);background:var(--chip);border-radius:999px;padding:6px 12px;font-weight:600}
+/* slider */
+.tabs{display:flex;gap:8px;margin:6px 0 12px}
+.tabs button{flex:1;font:inherit;font-weight:600;font-size:14.5px;padding:8px 0;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.cmp{position:relative;background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--line);--p:50%;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.cmp img{display:block;width:100%;height:auto;pointer-events:none}
+.cmp .top{position:absolute;inset:0;clip-path:inset(0 0 0 var(--p))}
+.cmp .handle{position:absolute;top:0;bottom:0;left:var(--p);width:3px;margin-left:-1.5px;background:var(--accent);pointer-events:none}
+.cmp .handle::after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.cmp .lab{position:absolute;top:8px;font-size:12.5px;font-weight:700;color:#111;background:rgba(255,255,255,.88);border:1px solid #d8dce2;border-radius:999px;padding:3px 9px;pointer-events:none}
+.cmp .lab.l{left:8px}.cmp .lab.r{right:8px}
+.cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize;touch-action:pan-y}
+.cbar{display:block;width:78%;max-width:420px;margin:10px auto 0;background:#fff;border-radius:8px}
+.hemi{font-size:13px;color:var(--muted);text-align:center;margin:6px 0 0}
+.fact{font-size:15px;margin:12px 0 0}
+video{width:100%;height:auto;border-radius:12px;background:#000;display:block}
+.cap{font-size:14px;color:var(--muted);margin:10px 0 0}
+.cap b{color:var(--ink)}
+.rows a.row{display:block;text-decoration:none;color:inherit;padding:12px 0;border-top:1px solid var(--line)}
+.rows a.row:first-child{border-top:0}
+.rows .t{font-weight:600;color:var(--accent)}
+.rows .d{font-size:14px;color:var(--muted)}
+footer{margin-top:40px;color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">APAN 2026 · SfN Neuroscience 2026</p>
+  <h1>Listening and looking in real-world conversation</h1>
+  <p class="byline">Xinran Yu, Arish Alreja, Michael J. Ward, Taylor Abel, Avniel Singh Ghuman<br>University of Pittsburgh · University of California, Los Angeles</p>
+  <p class="lead">We recorded intracranial EEG from three patients while they talked with visitors, and asked what the brain keeps track of: who is speaking, and where we look. Two posters, one dataset.</p>
+</header>
+
+<!-- ============ 1. POSTER-RELATED ONLY ============ -->
+<section id="posters">
+  <h2>The two posters</h2>
+  <p class="sub">Tap a poster to open the full PDF. Preliminary results, not peer reviewed.</p>
+
+  <article class="card">
+    <span class="tag">APAN · Poster #124 · Fri 11/13, 4:30–6 PM</span>
+    <h3>Decoding “who speaks when” in real-world conversations</h3>
+    <p class="sub" style="margin-bottom:0">Speech detection and speaker identity classification from intracranial EEG</p>
+    <ul>
+      <li>Others’ speech, the patient’s own speech, and silence can be told apart from iEEG in all three patients: <b>69–81%</b> 3-way accuracy (chance 33%).</li>
+      <li>The classifier uses multiple electrodes, mainly in superior temporal and parietal cortex.</li>
+      <li>A single superior temporal electrode separates two speakers above chance (56–66%): <b>preliminary</b>.</li>
+    </ul>
+    <a class="thumb" href="posters/SfN_APAN_posters_2026.pdf#page=1"><img src="assets/poster1.jpg" alt="APAN poster: Decoding who speaks when" loading="lazy"></a>
+    <div class="btns"><a class="btn" href="posters/SfN_APAN_posters_2026.pdf#page=1">Open poster PDF</a></div>
+  </article>
+
+  <p class="link-line">Same three patients, same conversations. The first poster asks <b>who is speaking</b>. The second adds <b>where the patient is looking</b>.</p>
+
+  <article class="card">
+    <span class="tag">SfN · Neuroscience 2026</span>
+    <h3>The neural correlates of gaze and conversation in real-world social interaction</h3>
+    <p class="sub" style="margin-bottom:0">Revealed by intracranial electroencephalography</p>
+    <ul>
+      <li>A 3-way classifier on the 200 ms after each fixation onset reaches <b>62–67%</b> accuracy (chance 33%) in all three patients.</li>
+      <li>Speech vs. silence is separated best (silence correct in 95%, 89%, 73% of cases); telling a face from an object during speech is harder.</li>
+      <li>Next: control for the overlap between faces and speech, then decode face identity and expression.</li>
+    </ul>
+    <a class="thumb" href="posters/SfN_APAN_posters_2026.pdf#page=2"><img src="assets/poster2.jpg" alt="SfN poster: Neural correlates of gaze and conversation" loading="lazy"></a>
+    <div class="btns"><a class="btn" href="posters/SfN_APAN_posters_2026.pdf#page=2">Open poster PDF</a></div>
+  </article>
+
+  <div class="more">
+    That is all you need from the posters. Keep scrolling if you are curious: <a href="#brain">brain maps</a>, <a href="#video">a video</a>, <a href="#links">papers</a>, <a href="#contact">contact</a>.
+  </div>
+</section>
+
+<!-- ============ 2. GO DEEPER ============ -->
+<section id="brain">
+  <h2>Where the classifier looks: before vs. after speech onset</h2>
+  <p class="sub">Drag the handle left and right.</p>
+  <div class="card">
+    <div class="tabs" role="tablist" aria-label="Subject">
+      <button role="tab" aria-selected="true" data-s="a">Subject A</button>
+      <button role="tab" aria-selected="false" data-s="b">Subject B</button>
+      <button role="tab" aria-selected="false" data-s="c">Subject C</button>
+    </div>
+    <div class="cmp" id="cmp">
+      <img id="imgBefore" src="assets/brain_a_before.png" alt="Electrode weights before speech onset">
+      <div class="top"><img id="imgAfter" src="assets/brain_a_after.png" alt="Electrode weights after speech onset"></div>
+      <span class="lab l">Before</span>
+      <span class="lab r">After</span>
+      <div class="handle"></div>
+      <input id="rng" type="range" min="0" max="100" step="0.1" value="50" aria-label="Compare before and after speech onset">
+    </div>
+    <img class="cbar" id="cbar" src="assets/cbar_a.png" alt="Colour scale: share of classifier weight in percent">
+    <p class="hemi">Before = 250 ms before speech onset · After = 250 ms after</p>
+    <p class="hemi" id="hemi" style="margin-top:2px">Right hemisphere, lateral view</p>
+    <p class="fact">Each dot is one electrode, coloured by how much of the 3-way classifier’s weight it carries (Others’ speech / Own speech / Silence). Grey dots carry none. After speech onset, <b>73–80%</b> of the weight sits in the later window.</p>
+  </div>
+</section>
+
+<section id="video">
+  <h2>What the patient sees, and what the brain does</h2>
+  <div class="card">
+    <video id="vid" controls playsinline muted loop preload="metadata" poster="assets/demo_gaze_ieeg_poster.jpg">
+      <source src="assets/demo_gaze_ieeg.mp4" type="video/mp4">
+    </video>
+    <p class="cap"><b>Left:</b> the patient’s world camera with automatic face / person / monitor boxes; the orange cross marks the gaze. <b>Top:</b> the audio waveform. <b>Right:</b> voltage and broadband activity of every electrode in the half second around each moment. The conversation partner is a member of the research team.</p>
+  </div>
+</section>
+
+<section id="links">
+  <h2>Read more</h2>
+  <div class="card rows">
+    <a class="row" href="https://www.lcnd.org/"><div class="t">Lab website</div><div class="d">lcnd.org</div></a>
+    <a class="row" href="https://arxiv.org/abs/2505.08831"><div class="t">Neural Encoding of Real World Face Perception</div><div class="d">Alreja, Ward, Parker, Richardson, Morency, Abel &amp; Ghuman · in press · arXiv preprint</div></a>
+    <a class="row" href="https://doi.org/10.3758/s13428-022-01882-9"><div class="t">A New Paradigm for Investigating Real-World Social Behavior and its Neural Underpinnings</div><div class="d">Alreja et al. · Behavior Research Methods, 2022</div></a>
+    <a class="row" href="posters/SfN_APAN_posters_2026.pdf"><div class="t">Both posters (PDF)</div><div class="d">Page 1: APAN · Page 2: SfN</div></a>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="card">
+    <p style="margin:0"><b>Xinran Yu</b><br>Ghuman lab, University of Pittsburgh</p>
+    <div class="btns"><a class="btn" href="mailto:xiy185@pitt.edu">xiy185@pitt.edu</a></div>
+  </div>
+</section>
+
+<footer>Preliminary results. Please do not cite without contacting the authors.</footer>
+</div>
+
+<script>
+(function(){
+  var S={
+    a:{b:"assets/brain_a_before.png",a:"assets/brain_a_after.png",c:"assets/cbar_a.png",h:"Right hemisphere, lateral view"},
+    b:{b:"assets/brain_b_before.png",a:"assets/brain_b_after.png",c:"assets/cbar_b.png",h:"Right hemisphere, lateral view"},
+    c:{b:"assets/brain_c_before.png",a:"assets/brain_c_after.png",c:"assets/cbar_c.png",h:"Left hemisphere, lateral view"}
+  };
+  var cmp=document.getElementById("cmp"), rng=document.getElementById("rng");
+  var touched=false;
+  function setP(v){cmp.style.setProperty("--p",v+"%");}
+  rng.addEventListener("input",function(){touched=true;setP(rng.value);});
+  Array.prototype.forEach.call(document.querySelectorAll(".tabs button"),function(btn){
+    btn.addEventListener("click",function(){
+      var k=btn.getAttribute("data-s");
+      Array.prototype.forEach.call(document.querySelectorAll(".tabs button"),function(x){x.setAttribute("aria-selected",x===btn?"true":"false");});
+      document.getElementById("imgBefore").src=S[k].b;
+      document.getElementById("imgAfter").src=S[k].a;
+      document.getElementById("cbar").src=S[k].c;
+      document.getElementById("hemi").textContent=S[k].h;
+    });
+  });
+  // one gentle sweep when the brain first scrolls into view
+  var reduce=false;
+  try{reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}
+  if("IntersectionObserver" in window && !reduce){
+    var done=false;
+    new IntersectionObserver(function(es,ob){
+      es.forEach(function(e){
+        if(e.isIntersecting && !done && !touched){
+          done=true; ob.disconnect();
+          var t0=null, dur=2600;
+          function step(ts){
+            if(touched) return;
+            if(t0===null) t0=ts;
+            var t=Math.min(1,(ts-t0)/dur);
+            var v=50+38*Math.sin(t*Math.PI*2)*(1-t*0.2);
+            rng.value=v; setP(v);
+            if(t<1) requestAnimationFrame(step); else {rng.value=50;setP(50);}
+          }
+          requestAnimationFrame(step);
+        }
+      });
+    },{threshold:0.6}).observe(cmp);
+  }
+  // video: autoplay muted loop only while visible
+  var vid=document.getElementById("vid");
+  if(vid && "IntersectionObserver" in window){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){var p=vid.play(); if(p&&p.catch)p.catch(function(){});} else {vid.pause();}
+      });
+    },{threshold:0.5}).observe(vid);
+  }
+})();
+</script>
+</body>
+</html>
