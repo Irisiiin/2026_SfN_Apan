@@ -2,448 +2,593 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e14">
 <title>Who Speaks When and Audiovisual Analysis · Xinran Yu</title>
-<meta name="description" content="Who Speaks When and Audiovisual Analysis in Un-scripted, Real-World Social Interactions. Xinran Yu, Laboratory of Cognitive Neurodynamics (LCND), University of Pittsburgh.">
+<meta name="description" content="Who Speaks When and Audiovisual Analysis in Un-scripted, Real-World Social Interactions. APAN 2026 and SfN 2026 posters.">
 <style>
 :root{
-  --bg:#f6f7f9; --card:#ffffff; --ink:#15181d; --muted:#5b6470; --line:#e2e5ea;
-  --accent:#1f5fd6; --accent-ink:#ffffff; --chip:#eaf0fc; --shadow:0 1px 2px rgba(20,24,30,.06),0 6px 20px rgba(20,24,30,.06);
+  --bg:#0b0e14; --ink:#f3f5f9; --muted:#9aa6b8; --line:rgba(255,255,255,.14);
+  --accent:#7aa7ff; --heart:#ff4d7d; --card:#ffffff; --cardink:#15181d;
+  --spring:cubic-bezier(.34,1.56,.64,1);
 }
-@media (prefers-color-scheme: dark){
-  :root{ --bg:#0f1216; --card:#181c22; --ink:#eef1f5; --muted:#9aa4b2; --line:#2a303a; --accent:#6ea2ff; --accent-ink:#0b1220; --chip:#1d2a44; --shadow:none; }
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%;overflow:hidden}
+button{font:inherit;color:inherit}
+#feed{
+  position:relative;height:100vh;height:100dvh;max-width:520px;margin:0 auto;
+  overflow-y:scroll;overflow-x:hidden;scroll-snap-type:y mandatory;overscroll-behavior-y:contain;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;background:var(--bg);touch-action:manipulation;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:56px}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
-.wrap{max-width:720px;margin:0 auto;padding:0 16px 56px}
-header{padding:26px 0 6px}
-.eyebrow{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
-h1{font-size:28px;line-height:1.2;margin:0 0 10px;letter-spacing:-.01em}
-.byline{color:var(--muted);font-size:14px;margin:0}
-.lead{font-size:17px;margin:14px 0 0}
-h2{font-size:22px;margin:0 0 4px;letter-spacing:-.005em}
-h3{font-size:17px;margin:0 0 4px}
-p{margin:8px 0}
-.sub{color:var(--muted);font-size:14px;margin:0 0 12px}
-/* top nav */
-nav.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin:10px -16px 0;padding:8px 16px;display:flex;gap:8px;overflow-x:auto;white-space:nowrap}
-nav.top a{font-size:14px;text-decoration:none;color:var(--accent);background:var(--chip);border-radius:999px;padding:6px 12px;font-weight:600;flex:none}
-/* project blocks */
-.project{margin-top:34px}
-.ptag{display:inline-block;background:var(--chip);color:var(--accent);font-weight:600;font-size:12.5px;border-radius:999px;padding:3px 10px;margin-bottom:8px}
-.slide{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0;box-shadow:var(--shadow)}
-.slide .n{font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
-.slide ul,.text ul{margin:8px 0 0;padding-left:20px}
-.slide li{margin:6px 0}
-.fig{margin:12px 0 0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;cursor:zoom-in}
-.fig img{display:block;width:100%;height:auto}
-.hint{font-size:12.5px;color:var(--muted);margin:6px 0 0}
-.two{display:flex;gap:12px;align-items:flex-start}
-.two .fig{flex:0 0 38%;margin-top:8px}
-.two ul{flex:1}
-.link-line{border-left:3px solid var(--accent);padding:2px 0 2px 12px;margin:16px 0}
-/* subject group */
-.group{margin:14px -16px}
-.group .tabs{position:sticky;top:50px;z-index:10;display:flex;gap:8px;padding:8px 16px;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.tabs button{flex:1;font:inherit;font-weight:600;font-size:14.5px;padding:8px 0;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
-.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.block{padding:0 16px}
-.block .slide{margin-bottom:6px}
-.car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 16px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#feed::-webkit-scrollbar{display:none}
+@media (min-width:560px){#feed{box-shadow:0 0 0 1px var(--line),0 20px 80px rgba(0,0,0,.6)}}
+
+.page{
+  position:relative;height:100vh;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;
+  display:flex;flex-direction:column;
+  padding:calc(env(safe-area-inset-top,0px) + 46px) 16px calc(env(safe-area-inset-bottom,0px) + 64px);
+  overflow:hidden;
+}
+.page.dark2{background:radial-gradient(120% 80% at 50% 0%,#17213a 0%,var(--bg) 60%)}
+.content{flex:1;min-height:0;display:flex;flex-direction:column;opacity:0;transform:translateY(46px) scale(.96);transition:transform .8s var(--spring),opacity .4s ease}
+.page.active .content{opacity:1;transform:none}
+.center{justify-content:center}
+.tag{align-self:flex-start;display:inline-block;color:var(--accent);border:1px solid var(--line);font-weight:600;font-size:12.5px;border-radius:999px;padding:4px 11px;margin-bottom:12px}
+h1{font-size:34px;line-height:1.12;margin:0 0 14px;letter-spacing:-.02em}
+h2{font-size:26px;line-height:1.18;margin:0 0 8px;letter-spacing:-.015em}
+.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.sub{color:var(--muted);font-size:15px;margin:0 0 6px}
+.n{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+ul.b{list-style:none;margin:0;padding:0}
+ul.b li{position:relative;padding-left:22px;margin:0 0 12px;font-size:19px;line-height:1.38;opacity:0;transform:translateY(18px);transition:transform .7s var(--spring),opacity .4s ease}
+ul.b li::before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.page.active ul.b li{opacity:1;transform:none}
+.page.active ul.b li:nth-child(1){transition-delay:.12s}
+.page.active ul.b li:nth-child(2){transition-delay:.22s}
+.page.active ul.b li:nth-child(3){transition-delay:.32s}
+.page.active ul.b li:nth-child(4){transition-delay:.42s}
+ul.b.sm li{font-size:16px;margin-bottom:8px}
+.stage{flex:1;min-height:0;display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.fig{position:relative;flex:1 1 0;min-height:0;background:#fff;border-radius:12px;overflow:hidden;display:flex}
+.fig img{width:100%;height:100%;object-fit:contain;display:block}
+.zoom{position:absolute;right:6px;bottom:6px;width:34px;height:34px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:16px;line-height:34px;text-align:center;padding:0;cursor:pointer}
+/* subject groups */
+.tabs{display:flex;gap:8px;margin:2px 0 10px}
+.tabs button{flex:1;font-weight:700;font-size:14.5px;padding:8px 0;border-radius:999px;border:1px solid var(--line);background:transparent;cursor:pointer;transition:transform .35s var(--spring),background .2s}
+.tabs button:active{transform:scale(.94)}
+.tabs button[aria-selected="true"]{background:var(--accent);color:#0b1220;border-color:var(--accent)}
+.car{position:relative;flex:1;min-height:0;display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-x pan-y}
 .car::-webkit-scrollbar{display:none}
-.car .card{flex:0 0 88%;scroll-snap-align:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px;box-shadow:var(--shadow)}
+.car .card{flex:0 0 88%;scroll-snap-align:center;scroll-snap-stop:always;display:flex;flex-direction:column;min-height:0}
 .car .card .lab{font-size:13px;font-weight:700;color:var(--accent);margin:0 0 6px}
-.car .card .fig{margin:0}
-.swipe{font-size:12.5px;color:var(--muted);text-align:center;margin:0 0 8px}
-.concl{border-color:var(--accent)}
-/* more section */
-.more-title{margin-top:44px}
-.cmp{position:relative;background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--line);--p:50%;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.cmp img{display:block;width:100%;height:auto;pointer-events:none}
+.car .card{justify-content:center}
+.car .card .fig{flex:0 1 auto;justify-content:center}
+.car .card .fig img{width:auto;max-width:100%;height:auto;max-height:calc(100vh - 320px);max-height:calc(100dvh - 320px)}
+.stage.one{justify-content:center}
+.stage.one .fig{flex:0 1 auto;justify-content:center}
+.stage.one .fig img{width:auto;max-width:100%;height:auto;max-height:calc(100vh - 340px);max-height:calc(100dvh - 340px)}
+.hintx{font-size:12.5px;color:var(--muted);text-align:center;margin:8px 0 0}
+/* bottom bar */
+.bar{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);height:48px;padding:0 14px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+.ibtn{position:relative;width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .45s var(--spring)}
+.ibtn:active{transform:scale(.82)}
+.ibtn svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ibtn.like.on svg{fill:var(--heart);stroke:var(--heart);animation:pop .6s var(--spring)}
+@keyframes pop{0%{transform:scale(.4)}60%{transform:scale(1.35)}100%{transform:scale(1)}}
+.ibtn.like.nudge::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--heart);animation:ring 1.8s ease-in-out infinite}
+@keyframes ring{0%,100%{opacity:0;transform:scale(.9)}50%{opacity:.9;transform:scale(1.15)}}
+.up{display:flex;flex-direction:column;align-items:center;font-size:12px;color:var(--muted);animation:breathe 2.4s ease-in-out infinite;pointer-events:none}
+.up svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;margin-top:-6px}
+.up svg:first-child{margin-top:0}
+@keyframes breathe{0%,100%{opacity:.12;transform:translateY(5px)}50%{opacity:.95;transform:translateY(-3px)}}
+.tip{position:absolute;left:66px;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);font-size:12.5px;color:var(--heart);animation:breathe 2.4s ease-in-out infinite;pointer-events:none;white-space:nowrap}
+.bigup{display:flex;flex-direction:column;align-items:center;margin-top:28px;color:var(--ink);animation:breathe 2.4s ease-in-out infinite}
+.bigup span{font-weight:700;letter-spacing:.04em;margin-bottom:2px}
+.bigup svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;margin-top:-10px}
+/* top hud */
+#hud{position:absolute;top:0;left:0;right:0;z-index:30;pointer-events:none;max-width:520px;margin:0 auto}
+#hudwrap{position:fixed;top:0;left:0;right:0;z-index:30;pointer-events:none}
+#hud{position:relative;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 0;display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+#prog{position:absolute;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--heart))}
+#hudwrap .in{max-width:520px;margin:0 auto;position:relative}
+#likecount b{color:var(--heart)}
+/* double tap heart */
+.burst{position:fixed;z-index:60;width:90px;height:90px;margin:-45px 0 0 -45px;pointer-events:none;animation:burst .9s var(--spring) forwards}
+.burst svg{width:100%;height:100%;fill:var(--heart);stroke:none;filter:drop-shadow(0 6px 18px rgba(255,77,125,.6))}
+@keyframes burst{0%{transform:scale(.3) rotate(-12deg);opacity:0}25%{transform:scale(1.15) rotate(6deg);opacity:1}70%{transform:scale(1) rotate(0);opacity:1}100%{transform:translateY(-70px) scale(1);opacity:0}}
+#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 84px);transform:translate(-50%,20px);background:#fff;color:#111;font-weight:600;font-size:14px;border-radius:999px;padding:10px 16px;opacity:0;pointer-events:none;transition:transform .5s var(--spring),opacity .25s;z-index:70;max-width:90vw;text-align:center}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+/* menu buttons */
+.big{display:block;width:100%;text-align:left;text-decoration:none;color:var(--ink);background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin:0 0 12px;cursor:pointer;transition:transform .4s var(--spring)}
+.big:active{transform:scale(.96)}
+.big .t{font-size:19px;font-weight:700}
+.big .d{font-size:14px;color:var(--muted)}
+/* brain slider */
+.cmp{position:relative;background:#fff;border-radius:12px;overflow:hidden;--p:50%;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.cmp img.base{display:block;width:100%;height:auto;pointer-events:none}
 .cmp .top{position:absolute;inset:0;clip-path:inset(0 0 0 var(--p))}
+.cmp .top img{display:block;width:100%;height:auto;pointer-events:none}
 .cmp .handle{position:absolute;top:0;bottom:0;left:var(--p);width:3px;margin-left:-1.5px;background:var(--accent);pointer-events:none}
-.cmp .handle::after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.cmp .lab2{position:absolute;top:8px;font-size:12.5px;font-weight:700;color:#111;background:rgba(255,255,255,.88);border:1px solid #d8dce2;border-radius:999px;padding:3px 9px;pointer-events:none}
+.cmp .handle::after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:var(--accent);color:#0b1220;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.cmp .lab2{position:absolute;top:8px;font-size:12.5px;font-weight:700;color:#111;background:rgba(255,255,255,.9);border:1px solid #d8dce2;border-radius:999px;padding:3px 9px;pointer-events:none}
 .cmp .lab2.l{left:8px}.cmp .lab2.r{right:8px}
 .cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize;touch-action:pan-y}
-.cbar{display:block;width:78%;max-width:420px;margin:10px auto 0;background:#fff;border-radius:8px}
-.hemi{font-size:13px;color:var(--muted);text-align:center;margin:6px 0 0}
-.brain-tabs{display:flex;gap:8px;margin:6px 0 12px}
-.brain-tabs button{flex:1;font:inherit;font-weight:600;font-size:14.5px;padding:8px 0;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
-.brain-tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-video{width:100%;height:auto;border-radius:12px;background:#000;display:block}
-.cap{font-size:14px;color:var(--muted);margin:10px 0 0}
-.cap b{color:var(--ink)}
-.btn{display:inline-block;text-decoration:none;font-weight:600;font-size:14.5px;border-radius:10px;padding:9px 14px;background:var(--accent);color:var(--accent-ink)}
-.rows a.row{display:block;text-decoration:none;color:inherit;padding:12px 0;border-top:1px solid var(--line)}
-.rows a.row:first-child{border-top:0}
-.rows .t{font-weight:600;color:var(--accent)}
-.rows .d{font-size:14px;color:var(--muted)}
-footer{margin-top:40px;color:var(--muted);font-size:13px;text-align:center}
+.cbar{display:block;width:70%;max-width:340px;margin:10px auto 0;background:#fff;border-radius:8px}
+.note{font-size:13px;color:var(--muted);text-align:center;margin:6px 0 0}
+/* video page */
+.content video{width:100%;height:auto;display:block;background:#000;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+/* links */
+.rows a{display:block;text-decoration:none;color:var(--ink);padding:14px 0;border-top:1px solid var(--line)}
+.rows a:first-child{border-top:0}
+.rows .t{font-weight:700;color:var(--accent);font-size:16.5px}
+.rows .d{font-size:13.5px;color:var(--muted)}
+.btn{display:inline-block;text-decoration:none;font-weight:700;font-size:16px;border-radius:999px;padding:12px 20px;background:var(--accent);color:#0b1220}
 /* lightbox */
-#lb{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.92);display:none;overflow:auto;-webkit-overflow-scrolling:touch}
+#lb{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.94);display:none;overflow:auto;-webkit-overflow-scrolling:touch}
 #lb.on{display:block}
-#lb img{display:block;width:230vw;max-width:none;height:auto;background:#fff;margin:56px 0 24px}
-#lbx{position:fixed;top:10px;right:12px;z-index:101;display:none;font:inherit;font-weight:700;font-size:15px;color:#fff;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:7px 14px}
+#lb img{display:block;width:230vw;max-width:none;height:auto;background:#fff;margin:60px 0 28px}
+#lbx{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);right:14px;z-index:101;display:none;font-weight:700;font-size:15px;color:#fff;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:8px 16px}
 #lbx.on{display:block}
+@media (prefers-reduced-motion: reduce){
+  .content,ul.b li{transition:none;transform:none;opacity:1}
+  .up,.bigup,.tip,.ibtn.like.nudge::after{animation:none;opacity:.7}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-<header>
-  <p class="eyebrow">APAN 2026 · SfN Neuroscience 2026</p>
-  <h1>Who Speaks When and Audiovisual Analysis in Un-scripted, Real-World Social Interactions</h1>
-  <p class="byline">Xinran Yu, Arish Alreja, Michael J. Ward, Taylor Abel, Avniel Singh Ghuman<br>University of Pittsburgh · University of California, Los Angeles</p>
-</header>
-<section id="video" style="margin:14px 0 0">
-  <video id="vid" controls autoplay playsinline muted loop preload="auto" poster="assets/demo_gaze_ieeg_poster.jpg" style="box-shadow:var(--shadow)">
-    <source src="assets/demo_gaze_ieeg.mp4" type="video/mp4">
-  </video>
-  <p class="cap" style="margin-top:8px">Patient’s eye-tracking view (left), audio (top) and brain activity of every electrode (right). The conversation partner is a member of the research team.</p>
+<div id="hudwrap"><div class="in"><div id="prog"></div><div id="hud"><span id="pgno">1 / 1</span><span id="likecount">♥ <b>0</b></span></div></div></div>
+
+<main id="feed">
+
+<!-- 1 · TITLE -->
+<section class="page dark2" data-id="title">
+  <div class="content center">
+    <p class="eyebrow">APAN 2026 · SfN Neuroscience 2026</p>
+    <h1>Who Speaks When and Audiovisual Analysis in Un-scripted, Real-World Social Interactions</h1>
+    <p class="sub">Xinran Yu</p>
+    <div class="bigup"><span>Swipe up</span>
+      <svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg>
+    </div>
+  </div>
 </section>
 
-<nav class="top" aria-label="Sections">
-  <a href="#apan">APAN poster</a>
-  <a href="#sfn">SfN poster</a>
-  <a href="#brain">Brain maps</a>
-  <a href="#links">Links</a>
-  <a href="#contact">Contact</a>
-</nav>
+<!-- 2 · VIDEO -->
+<section class="page dark2" data-id="video">
+  <div class="content center">
+    <p class="n">Watch</p>
+    <video id="vid" autoplay muted loop playsinline preload="auto" poster="assets/demo_gaze_ieeg_poster.jpg">
+      <source src="assets/demo_gaze_ieeg.mp4" type="video/mp4">
+    </video>
+    <p class="hintx" style="margin:6px 0 16px">Tap the video for full screen</p>
+    <ul class="b sm">
+      <li>Left: the patient’s eye-tracking view</li>
+      <li>Top: audio · Right: brain activity of every electrode</li>
+      <li>The conversation partner is a member of the research team</li>
+    </ul>
+  </div>
+</section>
 
-<!-- ================= POSTER 1 · APAN ================= -->
-<section class="project" id="apan">
-  <span class="ptag">APAN · Poster #124 · Fri 11/13, 4:30–6 PM</span>
-  <h2>Decoding “who speaks when” in real-world conversations</h2>
-  <p class="sub">Speech detection and speaker identity classification from intracranial EEG</p>
+<!-- 3 · MENU -->
+<section class="page dark2" data-id="menu">
+  <div class="content center">
+    <p class="n">Jump to</p>
+    <a class="big" data-go="apan"><div class="t">APAN poster</div><div class="d">Fri 11/13 · Decoding “who speaks when”</div></a>
+    <a class="big" data-go="sfn"><div class="t">SfN poster</div><div class="d">Gaze and conversation</div></a>
+    <a class="big" data-go="brain"><div class="t">Brain maps</div><div class="d">Before vs. after speech onset</div></a>
+    <a class="big" data-go="links"><div class="t">Papers and contact</div><div class="d">Lab, papers, email</div></a>
+  </div>
+</section>
 
-  <div class="slide text">
+<!-- ======== APAN ======== -->
+<section class="page dark2" data-id="apan">
+  <div class="content center">
+    <span class="tag">APAN · Poster #124 · Fri 11/13, 4:30–6 PM</span>
+    <h1>Decoding “who speaks when” in real-world conversations</h1>
+    <p class="sub">Speech detection and speaker identity classification from intracranial EEG</p>
+  </div>
+</section>
+
+<section class="page" data-id="apan-summary">
+  <div class="content center">
     <p class="n">Summary</p>
-    <ul>
+    <ul class="b">
       <li>iEEG and eye-tracking glasses in <b>3 patients</b> during natural conversation</li>
       <li>Goal: tell when the patient speaks, when others speak, and who is speaking</li>
       <li>Above chance in every patient; strong responses in superior and transverse temporal cortex</li>
       <li>Telling speakers apart from a single electrode: <b>preliminary</b></li>
     </ul>
   </div>
+</section>
 
-  <div class="slide">
+<section class="page" data-id="apan-data">
+  <div class="content">
     <p class="n">Data and task</p>
-    <ul>
-      <li>3 patients · ~110 electrodes each · ~10 h of conversation</li>
-      <li>Input X: brain activity (ERP + broadband)</li>
-      <li>Output Y: who is speaking, aligned in time</li>
+    <ul class="b sm">
+      <li>3 patients · ~110 electrodes each · ~10 h</li>
+      <li>X: brain activity (ERP + broadband) · Y: who is speaking</li>
     </ul>
-    <div class="fig"><img src="assets/fig/p1_data.jpg" alt="Data summary and sanity check: beep responses in electrode 38" loading="lazy"></div>
-    <div class="fig"><img src="assets/fig/p1_pipe.jpg" alt="Pipeline: brain data and speaker labels aligned, elastic net classifier" loading="lazy"></div>
-    <p class="hint">Tap a figure to enlarge.</p>
+    <div class="stage">
+      <div class="fig" style="flex:469 1 0"><img src="assets/fig/p1_data.jpg" alt="Data summary and sanity check"><button class="zoom" aria-label="Enlarge">⤢</button></div>
+      <div class="fig" style="flex:853 1 0"><img src="assets/fig/p1_pipe.jpg" alt="Pipeline: brain data and speaker labels aligned, elastic net classifier"><button class="zoom" aria-label="Enlarge">⤢</button></div>
+    </div>
   </div>
+</section>
 
-  <div class="slide">
+<section class="page" data-id="apan-all">
+  <div class="content">
     <p class="n">All three patients</p>
-    <ul>
-      <li>Speech vs. silence and own vs. others’ speech (chance 50%)</li>
+    <ul class="b sm">
+      <li>Pairwise accuracy (chance 50%)</li>
       <li>Classifier weight sits mostly <b>after</b> speech onset</li>
     </ul>
-    <div class="fig"><img src="assets/fig/p1_multi.jpg" alt="Accuracy per subject and pooled glass brain before and after speech onset" loading="lazy"></div>
+    <div class="stage one"><div class="fig"><img src="assets/fig/p1_multi.jpg" alt="Accuracy per subject and pooled glass brain"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
   </div>
+</section>
 
-  <!-- subject group: APAN -->
-  <div class="group" data-group="apan">
-    <div class="tabs" role="tablist" aria-label="Subject">
-      <button role="tab" aria-selected="true" data-i="0">Subject A</button>
-      <button role="tab" aria-selected="false" data-i="1">Subject B</button>
-      <button role="tab" aria-selected="false" data-i="2">Subject C</button>
+<section class="page" data-id="apan-3way">
+  <div class="content">
+    <p class="n">Others · Self · Silence</p>
+    <ul class="b sm">
+      <li>3-way, chance 33.3% · all electrodes, ERP + broadband</li>
+    </ul>
+    <div class="tabs" data-group="apan"><button aria-selected="true" data-i="0">Subject A</button><button aria-selected="false" data-i="1">B</button><button aria-selected="false" data-i="2">C</button></div>
+    <div class="car" data-group="apan">
+      <div class="card"><div class="fig"><img src="assets/fig/p1_3way_a.jpg" alt="Subject A"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
+      <div class="card"><div class="fig"><img src="assets/fig/p1_3way_b.jpg" alt="Subject B"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
+      <div class="card"><div class="fig"><img src="assets/fig/p1_3way_c.jpg" alt="Subject C"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
     </div>
-
-    <div class="block">
-      <div class="slide" style="margin-bottom:0">
-        <p class="n">Others · Self · Silence</p>
-        <ul>
-          <li>3-way, chance 33.3%</li>
-          <li>All electrodes, ERP + broadband</li>
-          <li>Bars: electrodes per brain area (grey = implanted, coloured = used)</li>
-        </ul>
-      </div>
-    </div>
-    <div class="car">
-      <div class="card"><div class="fig"><img src="assets/fig/p1_3way_a.jpg" alt="Subject A confusion matrix and brain areas" loading="lazy"></div></div>
-      <div class="card"><div class="fig"><img src="assets/fig/p1_3way_b.jpg" alt="Subject B confusion matrix and brain areas" loading="lazy"></div></div>
-      <div class="card"><div class="fig"><img src="assets/fig/p1_3way_c.jpg" alt="Subject C confusion matrix and brain areas" loading="lazy"></div></div>
-    </div>
-    <p class="swipe">← swipe, or tap A / B / C →</p>
-
-    <div class="block">
-      <div class="slide" style="margin-bottom:0">
-        <p class="n">Who is speaking? One electrode</p>
-        <ul>
-          <li>Two speakers, one superior temporal electrode (chance 50%)</li>
-          <li>Staff vs Daughter 65.8% · Mom vs Dad 56.0% · Mom vs Daughter 60.4%</li>
-          <li>Electrode chosen from several: <b>preliminary</b></li>
-        </ul>
-        <div class="two">
-          <ul style="margin:0;font-size:14px;color:var(--muted)">
-            <li>Lower plots: ERP and broadband, −250 to +250 ms around speech onset</li>
-          </ul>
-          <div class="fig"><img src="assets/fig/p1_idelec.jpg" alt="Location of the three electrodes on a glass brain" loading="lazy"></div>
-        </div>
-      </div>
-    </div>
-    <div class="car">
-      <div class="card"><p class="lab">Subject A</p><div class="fig"><img src="assets/fig/p1_id_a.jpg" alt="Subject A speaker identity" loading="lazy"></div></div>
-      <div class="card"><p class="lab">Subject B</p><div class="fig"><img src="assets/fig/p1_id_b.jpg" alt="Subject B speaker identity" loading="lazy"></div></div>
-      <div class="card"><p class="lab">Subject C</p><div class="fig"><img src="assets/fig/p1_id_c.jpg" alt="Subject C speaker identity" loading="lazy"></div></div>
-    </div>
-    <p class="swipe">← swipe, or tap A / B / C →</p>
+    <p class="hintx">← swipe sideways →</p>
   </div>
+</section>
 
-  <div class="slide text concl">
+<section class="page" data-id="apan-id">
+  <div class="content">
+    <p class="n">Who is speaking? One electrode</p>
+    <ul class="b sm">
+      <li>Two speakers, chance 50%: <b>preliminary</b></li>
+      <li>Electrode chosen from several</li>
+    </ul>
+    <div class="tabs" data-group="apan"><button aria-selected="true" data-i="0">Subject A</button><button aria-selected="false" data-i="1">B</button><button aria-selected="false" data-i="2">C</button></div>
+    <div class="car" data-group="apan">
+      <div class="card"><div class="fig"><img src="assets/fig/p1_id_a.jpg" alt="Subject A speaker identity"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
+      <div class="card"><div class="fig"><img src="assets/fig/p1_id_b.jpg" alt="Subject B speaker identity"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
+      <div class="card"><div class="fig"><img src="assets/fig/p1_id_c.jpg" alt="Subject C speaker identity"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
+    </div>
+    <p class="hintx">← swipe sideways →</p>
+  </div>
+</section>
+
+<section class="page" data-id="apan-concl">
+  <div class="content center">
     <p class="n">Conclusions</p>
-    <ul>
-      <li>Others’ speech, the patient’s own speech, and silence can be distinguished from iEEG in real-world settings in all three patients: <b>69–81%</b> 3-way accuracy (chance 33%)</li>
-      <li>The classifier uses multiple electrodes, mainly in the superior temporal and parietal cortex</li>
-      <li>A single superior temporal electrode separates two speakers above chance (56–66%): <b>preliminary</b></li>
+    <ul class="b">
+      <li>Others’ speech, own speech and silence can be told apart in all three patients: <b>69–81%</b> (chance 33%)</li>
+      <li>Multiple electrodes, mainly superior temporal and parietal cortex</li>
+      <li>One superior temporal electrode separates two speakers above chance (56–66%): <b>preliminary</b></li>
       <li>Next: more speakers and more patients</li>
     </ul>
   </div>
 </section>
 
-<!-- ================= POSTER 2 · SfN ================= -->
-<section class="project" id="sfn">
-  <span class="ptag">SfN · Neuroscience 2026</span>
-  <h2>Neural correlates of gaze and conversation in real-world social interaction</h2>
-  <p class="sub">Revealed by intracranial electroencephalography</p>
+<!-- ======== SfN ======== -->
+<section class="page dark2" data-id="sfn">
+  <div class="content center">
+    <span class="tag">SfN · Neuroscience 2026</span>
+    <h1>Neural correlates of gaze and conversation in real-world social interaction</h1>
+    <p class="sub">Revealed by intracranial electroencephalography</p>
+  </div>
+</section>
 
-  <div class="slide text">
+<section class="page" data-id="sfn-summary">
+  <div class="content center">
     <p class="n">Summary</p>
-    <ul>
+    <ul class="b">
       <li>Same 3 patients, now with eye-tracking glasses and their visitors</li>
-      <li>Question: how does the brain combine <b>where we look</b> with <b>what we hear</b>?</li>
-      <li>Data: the 200 ms after each fixation onset (ERP + broadband)</li>
+      <li>How does the brain combine <b>where we look</b> with <b>what we hear</b>?</li>
+      <li>Data: the 200 ms after each fixation onset</li>
       <li>Activity after each fixation carried information about speech in all three patients</li>
     </ul>
   </div>
+</section>
 
-  <div class="slide">
+<section class="page" data-id="sfn-design">
+  <div class="content">
     <p class="n">Design</p>
-    <ul>
-      <li>Looking at a face or an object × speech or silence</li>
+    <ul class="b sm">
+      <li>Face or object × speech or silence</li>
       <li>Fixation onset aligned to brain data and speaker labels</li>
     </ul>
-    <div class="fig"><img src="assets/fig/p2_design.jpg" alt="Data and audiovisual scenarios: face or object, speech or silence" loading="lazy"></div>
-    <div class="fig"><img src="assets/fig/p2_pipe.jpg" alt="Pipeline: brain data, speaker labels, eye tracking aligned, elastic net classifier" loading="lazy"></div>
-    <p class="hint">Tap a figure to enlarge.</p>
+    <div class="stage">
+      <div class="fig" style="flex:512 1 0"><img src="assets/fig/p2_design.jpg" alt="Audiovisual scenarios"><button class="zoom" aria-label="Enlarge">⤢</button></div>
+      <div class="fig" style="flex:530 1 0"><img src="assets/fig/p2_pipe.jpg" alt="Pipeline"><button class="zoom" aria-label="Enlarge">⤢</button></div>
+    </div>
   </div>
+</section>
 
-  <div class="slide">
+<section class="page" data-id="sfn-warm">
+  <div class="content">
     <p class="n">Warm-up checks</p>
-    <ul>
+    <ul class="b sm">
       <li>Who speaks when works in these recordings (top)</li>
-      <li>Face vs. object (green) is above chance, but faces often coincide with speech: <b>control analysis in progress</b></li>
+      <li>Face vs. object (green): above chance, but faces often coincide with speech. <b>Control analysis in progress</b></li>
     </ul>
-    <div class="fig"><img src="assets/fig/p2_feas.jpg" alt="Feasibility check accuracy and gaze on face vs object accuracy" loading="lazy"></div>
+    <div class="stage one"><div class="fig"><img src="assets/fig/p2_feas.jpg" alt="Feasibility check accuracies"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
   </div>
+</section>
 
-  <div class="group" data-group="sfn">
-    <div class="tabs" role="tablist" aria-label="Subject">
-      <button role="tab" aria-selected="true" data-i="0">Subject A</button>
-      <button role="tab" aria-selected="false" data-i="1">Subject B</button>
-      <button role="tab" aria-selected="false" data-i="2">Subject C</button>
+<section class="page" data-id="sfn-class">
+  <div class="content">
+    <p class="n">3-way classification</p>
+    <ul class="b sm">
+      <li>62.3% · 66.3% · 67.1% (chance 33.3%)</li>
+    </ul>
+    <div class="tabs" data-group="sfn"><button aria-selected="true" data-i="0">Subject A</button><button aria-selected="false" data-i="1">B</button><button aria-selected="false" data-i="2">C</button></div>
+    <div class="car" data-group="sfn">
+      <div class="card"><div class="fig"><img src="assets/fig/p2_class_a.jpg" alt="Subject A"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
+      <div class="card"><div class="fig"><img src="assets/fig/p2_class_b.jpg" alt="Subject B"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
+      <div class="card"><div class="fig"><img src="assets/fig/p2_class_c.jpg" alt="Subject C"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
     </div>
-
-    <div class="block">
-      <div class="slide" style="margin-bottom:0">
-        <p class="n">3-way classification</p>
-        <ul>
-          <li>62.3% · 66.3% · 67.1% (chance 33.3%)</li>
-          <li>Silence is separated best; face vs. object during speech is harder</li>
-        </ul>
-      </div>
-    </div>
-    <div class="car">
-      <div class="card"><div class="fig"><img src="assets/fig/p2_class_a.jpg" alt="Subject A confusion matrix and brain areas" loading="lazy"></div></div>
-      <div class="card"><div class="fig"><img src="assets/fig/p2_class_b.jpg" alt="Subject B confusion matrix and brain areas" loading="lazy"></div></div>
-      <div class="card"><div class="fig"><img src="assets/fig/p2_class_c.jpg" alt="Subject C confusion matrix and brain areas" loading="lazy"></div></div>
-    </div>
-    <p class="swipe">← swipe, or tap A / B / C →</p>
-
-    <div class="block">
-      <div class="slide" style="margin-bottom:0">
-        <p class="n">Fixation-locked responses</p>
-        <ul>
-          <li>Broadband and ERP, 0–200 ms after fixation</li>
-          <li>Top: superior temporal electrode · bottom: insula electrode</li>
-        </ul>
-      </div>
-    </div>
-    <div class="car">
-      <div class="card"><p class="lab">Subject A</p><div class="fig"><img src="assets/fig/p2_resp_a.jpg" alt="Subject A fixation-locked responses" loading="lazy"></div></div>
-      <div class="card"><p class="lab">Subject B</p><div class="fig"><img src="assets/fig/p2_resp_b.jpg" alt="Subject B fixation-locked responses" loading="lazy"></div></div>
-      <div class="card"><p class="lab">Subject C</p><div class="fig"><img src="assets/fig/p2_resp_c.jpg" alt="Subject C fixation-locked responses" loading="lazy"></div></div>
-    </div>
-    <p class="swipe">← swipe, or tap A / B / C →</p>
+    <p class="hintx">← swipe sideways →</p>
   </div>
+</section>
 
-  <div class="slide text concl">
+<section class="page" data-id="sfn-resp">
+  <div class="content">
+    <p class="n">Fixation-locked responses</p>
+    <ul class="b sm">
+      <li>Broadband and ERP, 0–200 ms · top: superior temporal, bottom: insula</li>
+    </ul>
+    <div class="tabs" data-group="sfn"><button aria-selected="true" data-i="0">Subject A</button><button aria-selected="false" data-i="1">B</button><button aria-selected="false" data-i="2">C</button></div>
+    <div class="car" data-group="sfn">
+      <div class="card"><div class="fig"><img src="assets/fig/p2_resp_a.jpg" alt="Subject A responses"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
+      <div class="card"><div class="fig"><img src="assets/fig/p2_resp_b.jpg" alt="Subject B responses"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
+      <div class="card"><div class="fig"><img src="assets/fig/p2_resp_c.jpg" alt="Subject C responses"><button class="zoom" aria-label="Enlarge">⤢</button></div></div>
+    </div>
+    <p class="hintx">← swipe sideways →</p>
+  </div>
+</section>
+
+<section class="page" data-id="sfn-concl">
+  <div class="content center">
     <p class="n">Conclusions</p>
-    <ul>
-      <li>A 3-way classifier on the 200 ms after fixation onset reaches <b>62–67%</b> (chance 33%) in all three patients</li>
-      <li>Speech vs. silence is separated best (silence correct in 95%, 89%, 73% of cases); face vs. object during speech is harder</li>
-      <li>The classifier draws on parietal and superior temporal electrodes in every patient</li>
-      <li>Next: control for face–speech overlap, then decode face identity and expression</li>
+    <ul class="b">
+      <li>A 3-way classifier on the 200 ms after fixation reaches <b>62–67%</b> (chance 33%) in all three patients</li>
+      <li>Speech vs. silence is separated best (silence correct in 95%, 89%, 73%); face vs. object during speech is harder</li>
+      <li>Parietal and superior temporal electrodes in every patient</li>
+      <li>Next: control for face–speech overlap, then face identity and expression</li>
     </ul>
   </div>
 </section>
 
-<!-- ================= GO DEEPER ================= -->
-<section id="brain" class="more-title">
-  <h2>Where the classifier looks</h2>
-  <p class="sub">Before vs. after speech onset. Drag the handle.</p>
-  <div class="slide">
-    <div class="brain-tabs" role="tablist" aria-label="Subject">
-      <button role="tab" aria-selected="true" data-s="a">Subject A</button>
-      <button role="tab" aria-selected="false" data-s="b">Subject B</button>
-      <button role="tab" aria-selected="false" data-s="c">Subject C</button>
-    </div>
+<!-- BRAIN -->
+<section class="page dark2" data-id="brain">
+  <div class="content">
+    <p class="n">Where the classifier looks</p>
+    <ul class="b sm"><li>Drag the handle: before vs. after speech onset</li></ul>
+    <div class="tabs" id="btabs"><button aria-selected="true" data-s="a">Subject A</button><button aria-selected="false" data-s="b">B</button><button aria-selected="false" data-s="c">C</button></div>
     <div class="cmp" id="cmp">
-      <img id="imgBefore" src="assets/brain_a_before.png" alt="Electrode weights before speech onset">
-      <div class="top"><img id="imgAfter" src="assets/brain_a_after.png" alt="Electrode weights after speech onset"></div>
-      <span class="lab2 l">Before</span>
-      <span class="lab2 r">After</span>
+      <img class="base" id="imgBefore" src="assets/brain_a_before.png" alt="Weights before speech onset">
+      <div class="top"><img id="imgAfter" src="assets/brain_a_after.png" alt="Weights after speech onset"></div>
+      <span class="lab2 l">Before</span><span class="lab2 r">After</span>
       <div class="handle"></div>
       <input id="rng" type="range" min="0" max="100" step="0.1" value="50" aria-label="Compare before and after speech onset">
     </div>
-    <img class="cbar" id="cbar" src="assets/cbar_a.png" alt="Colour scale: share of classifier weight in percent">
-    <p class="hemi">Before = 250 ms before speech onset · After = 250 ms after</p>
-    <p class="hemi" id="hemi" style="margin-top:2px">Right hemisphere, lateral view</p>
-    <ul style="margin:10px 0 0;padding-left:20px;font-size:15px">
-      <li>Each dot is one electrode; colour = share of the 3-way classifier’s weight</li>
-      <li>Grey = no weight</li>
-      <li>After onset: <b>73–80%</b> of the weight</li>
-    </ul>
+    <img class="cbar" id="cbar" src="assets/cbar_a.png" alt="Colour scale">
+    <p class="note">Before = 250 ms before onset · After = 250 ms after · dot colour = share of classifier weight · <span id="hemi">right hemisphere</span></p>
+    <p class="note" style="margin-top:2px">After onset carries 73–80% of the weight</p>
   </div>
 </section>
 
-<section id="links" style="margin-top:34px">
-  <h2>Read more</h2>
-  <div class="slide rows">
-    <a class="row" href="https://www.lcnd.org/"><div class="t">Laboratory of Cognitive Neurodynamics (LCND)</div><div class="d">lcnd.org</div></a>
-    <a class="row" href="https://arxiv.org/abs/2505.08831"><div class="t">Neural Encoding of Real World Face Perception</div><div class="d">Alreja, Ward, Parker, Richardson, Morency, Abel &amp; Ghuman · in press · arXiv preprint</div></a>
-    <a class="row" href="https://doi.org/10.3758/s13428-022-01882-9"><div class="t">A New Paradigm for Investigating Real-World Social Behavior and its Neural Underpinnings</div><div class="d">Alreja et al. · Behavior Research Methods, 2022</div></a>
-    <a class="row" href="posters/SfN_APAN_posters_2026.pdf"><div class="t">Both posters (PDF)</div><div class="d">Page 1: APAN · Page 2: SfN</div></a>
+<!-- LINKS -->
+<section class="page" data-id="links">
+  <div class="content center">
+    <p class="n">Read more</p>
+    <div class="rows">
+      <a href="https://www.lcnd.org/"><div class="t">Laboratory of Cognitive Neurodynamics (LCND)</div><div class="d">lcnd.org</div></a>
+      <a href="https://arxiv.org/abs/2505.08831"><div class="t">Neural Encoding of Real World Face Perception</div><div class="d">Alreja et al. · in press · arXiv preprint</div></a>
+      <a href="https://doi.org/10.3758/s13428-022-01882-9"><div class="t">A New Paradigm for Investigating Real-World Social Behavior and its Neural Underpinnings</div><div class="d">Alreja et al. · Behavior Research Methods, 2022</div></a>
+      <a href="posters/SfN_APAN_posters_2026.pdf"><div class="t">Both posters (PDF)</div><div class="d">Page 1: APAN · Page 2: SfN</div></a>
+    </div>
   </div>
 </section>
 
-<section id="contact" style="margin-top:34px">
-  <h2>Contact</h2>
-  <div class="slide">
-    <p style="margin:0"><b>Xinran Yu</b><br>Laboratory of Cognitive Neurodynamics (LCND)<br>PI: Avniel Ghuman · University of Pittsburgh</p>
-    <p style="margin:12px 0 0"><a class="btn" href="mailto:xiy185@pitt.edu">xiy185@pitt.edu</a></p>
+<!-- CREDITS -->
+<section class="page dark2" data-id="credits" data-last="1">
+  <div class="content center">
+    <p class="n">Thank you</p>
+    <h2>Xinran Yu</h2>
+    <p class="sub">Xinran Yu, Arish Alreja, Michael J. Ward, Taylor Abel, Avniel Singh Ghuman</p>
+    <p class="sub" style="margin-top:14px"><b style="color:var(--ink)">PI:</b> Avniel Ghuman<br>Laboratory of Cognitive Neurodynamics (LCND)<br>University of Pittsburgh · University of California, Los Angeles</p>
+    <p style="margin:18px 0 0"><a class="btn" href="mailto:xiy185@pitt.edu">xiy185@pitt.edu</a></p>
+    <p class="sub" style="margin-top:22px;font-size:13px">Preliminary results. Please do not cite without contacting the authors.</p>
   </div>
 </section>
 
-<footer>Preliminary results. Please do not cite without contacting the authors.</footer>
-</div>
+</main>
 
+<div id="toast" role="status"></div>
 <div id="lb" aria-hidden="true"><img alt=""></div>
 <button id="lbx" type="button">Close</button>
 
 <script>
 (function(){
-  /* ---------- subject groups: tabs sync all carousels in the group ---------- */
-  Array.prototype.forEach.call(document.querySelectorAll(".group"),function(g){
-    var tabs=g.querySelectorAll(".tabs button"), cars=g.querySelectorAll(".car");
-    var cur=0, lock=false, timer=null;
-    function setTab(i){cur=i;Array.prototype.forEach.call(tabs,function(b,k){b.setAttribute("aria-selected",k===i?"true":"false");});}
-    function goto(car,i,smooth){
-      var c=car.children[i]; if(!c) return;
-      var left=c.offsetLeft-(car.clientWidth-c.clientWidth)/2;
-      car.scrollTo({left:left,behavior:smooth?"smooth":"auto"});
-    }
-    function all(i,except){Array.prototype.forEach.call(cars,function(car){if(car!==except)goto(car,i,true);});}
-    Array.prototype.forEach.call(tabs,function(b,k){
-      b.addEventListener("click",function(){
-        lock=true; setTab(k); all(k,null);
-        clearTimeout(timer); timer=setTimeout(function(){lock=false;},600);
-      });
+  var feed=document.getElementById("feed");
+  var pages=Array.prototype.slice.call(document.querySelectorAll(".page"));
+  var N=pages.length;
+  var HEART='<svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.9 5 6.2 5c2.1 0 3.8 1.2 5.8 3.4C14 6.2 15.700 5 17.800 5c3.300 0 5.300 3.400 3.800 6.800C19.500 16.400 12 21 12 21z"/></svg>';
+  var SHARE='<svg viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>';
+  var CHEV='<svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg>';
+
+  /* ---------- likes: stored in this browser only ---------- */
+  var KEY="sfnapan26_likes_v1", mem=[];
+  function loadLikes(){try{var a=JSON.parse(localStorage.getItem(KEY)||"[]");return Array.isArray(a)?a:[];}catch(e){return mem.slice();}}
+  function saveLikes(a){mem=a.slice();try{localStorage.setItem(KEY,JSON.stringify(a));}catch(e){}}
+  var likes=loadLikes();
+  function isLiked(id){return likes.indexOf(id)>=0;}
+  function paintLikes(){
+    pages.forEach(function(p){var b=p.querySelector(".like"); if(b){b.classList.toggle("on",isLiked(p.getAttribute("data-id")));b.setAttribute("aria-pressed",isLiked(p.getAttribute("data-id"))?"true":"false");}});
+    document.querySelector("#likecount b").textContent=likes.length;
+    var nudge=likes.length===0;
+    Array.prototype.forEach.call(document.querySelectorAll(".like"),function(b){b.classList.toggle("nudge",nudge);});
+    Array.prototype.forEach.call(document.querySelectorAll(".tip"),function(t){t.style.display=nudge?"":"none";});
+  }
+  function toggleLike(id,forceOn){
+    var i=likes.indexOf(id);
+    if(i>=0){ if(forceOn) return; likes.splice(i,1);} else { likes.push(id); if(navigator.vibrate){try{navigator.vibrate(12);}catch(e){}} }
+    saveLikes(likes); paintLikes();
+  }
+
+  /* ---------- toast + copy ---------- */
+  var toast=document.getElementById("toast"), tt=null;
+  function say(msg){toast.textContent=msg;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove("on");},1900);}
+  function copy(text){
+    if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(text);}
+    return new Promise(function(res,rej){
+      var t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","");t.style.cssText="position:fixed;opacity:0;top:0;left:0";
+      document.body.appendChild(t);t.select();t.setSelectionRange(0,text.length);
+      var ok=false;try{ok=document.execCommand("copy");}catch(e){}
+      document.body.removeChild(t); ok?res():rej();
     });
-    Array.prototype.forEach.call(cars,function(car){
+  }
+  function shareLink(){
+    var url=location.href.split("#")[0].split("?")[0];
+    copy(url).then(function(){say("Link copied to clipboard");},function(){say("Copy this link: "+url);});
+  }
+
+  /* ---------- bottom bars ---------- */
+  pages.forEach(function(p,idx){
+    var id=p.getAttribute("data-id"), last=p.hasAttribute("data-last");
+    var bar=document.createElement("div"); bar.className="bar";
+    var like=document.createElement("button"); like.className="ibtn like"; like.type="button"; like.setAttribute("aria-label","Like this page"); like.innerHTML=HEART;
+    like.addEventListener("click",function(e){e.stopPropagation();toggleLike(id,false);});
+    var mid=document.createElement("div");
+    if(!last && idx>0){mid.className="up";mid.innerHTML=CHEV+CHEV;}
+    var sh=document.createElement("button"); sh.className="ibtn"; sh.type="button"; sh.setAttribute("aria-label","Copy link to this website"); sh.innerHTML=SHARE;
+    sh.addEventListener("click",function(e){e.stopPropagation();shareLink();});
+    bar.appendChild(like); bar.appendChild(mid); bar.appendChild(sh); p.appendChild(bar);
+    if(idx<2){var tip=document.createElement("div");tip.className="tip";tip.textContent="Tap ♥ to like";p.appendChild(tip);}
+  });
+  paintLikes();
+
+  /* ---------- double-tap to like ---------- */
+  var lastTap=0, lastX=0, lastY=0;
+  feed.addEventListener("touchend",function(e){
+    var t=e.changedTouches&&e.changedTouches[0]; if(!t) return;
+    var el=e.target; if(el.closest&&el.closest("button,a,input,.car,.cmp,.tabs")) {lastTap=0;return;}
+    var now=Date.now();
+    if(now-lastTap<320 && Math.abs(t.clientX-lastX)<40 && Math.abs(t.clientY-lastY)<40){doubleTap(t.clientX,t.clientY);lastTap=0;}
+    else{lastTap=now;lastX=t.clientX;lastY=t.clientY;}
+  },{passive:true});
+  feed.addEventListener("dblclick",function(e){if(e.target.closest&&e.target.closest("button,a,input,.cmp,.tabs"))return;doubleTap(e.clientX,e.clientY);});
+  function doubleTap(x,y){
+    var p=pages[current()]; if(!p) return;
+    toggleLike(p.getAttribute("data-id"),true);
+    var b=document.createElement("div"); b.className="burst"; b.style.left=x+"px"; b.style.top=y+"px"; b.innerHTML=HEART;
+    document.body.appendChild(b); setTimeout(function(){document.body.removeChild(b);},950);
+  }
+
+  /* ---------- active page, progress, spring entrance ---------- */
+  function current(){return Math.max(0,Math.min(N-1,Math.round(feed.scrollTop/feed.clientHeight)));}
+  var pgno=document.getElementById("pgno"), prog=document.getElementById("prog");
+  function hud(){
+    var max=feed.scrollHeight-feed.clientHeight; prog.style.width=(max>0?feed.scrollTop/max*100:0)+"%";
+    pgno.textContent=(current()+1)+" / "+N;
+  }
+  feed.addEventListener("scroll",hud,{passive:true}); window.addEventListener("resize",hud); hud();
+  var vid=document.getElementById("vid");
+  vid.addEventListener("click",function(){try{if(vid.webkitEnterFullscreen){vid.webkitEnterFullscreen();}else if(vid.requestFullscreen){vid.requestFullscreen();}}catch(e){}});
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        e.target.classList.toggle("active",e.isIntersecting);
+        if(e.target.contains(vid)){ if(e.isIntersecting){var pr=vid.play(); if(pr&&pr.catch)pr.catch(function(){});} else {vid.pause();} }
+      });
+    },{root:feed,threshold:0.6});
+    pages.forEach(function(p){io.observe(p);});
+  } else {pages.forEach(function(p){p.classList.add("active");});}
+
+  /* ---------- jump buttons and keyboard ---------- */
+  function goPage(id){
+    var el=document.querySelector('.page[data-id="'+id+'"]'); if(!el) return;
+    feed.scrollTo({top:el.offsetTop,behavior:"smooth"});
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-go]"),function(a){a.addEventListener("click",function(e){e.preventDefault();goPage(a.getAttribute("data-go"));});});
+  document.addEventListener("keydown",function(e){
+    if(e.key==="ArrowDown"||e.key==="PageDown"){e.preventDefault();feed.scrollBy({top:feed.clientHeight,behavior:"smooth"});}
+    if(e.key==="ArrowUp"||e.key==="PageUp"){e.preventDefault();feed.scrollBy({top:-feed.clientHeight,behavior:"smooth"});}
+    if(e.key==="Escape")closeLb();
+  });
+
+  /* ---------- subject groups: all tabs and carousels in a group stay in step ---------- */
+  var groups={};
+  Array.prototype.forEach.call(document.querySelectorAll("[data-group]"),function(el){
+    var g=el.getAttribute("data-group"); groups[g]=groups[g]||{tabs:[],cars:[],cur:0,lock:false,timer:null};
+    (el.classList.contains("tabs")?groups[g].tabs:groups[g].cars).push(el);
+  });
+  Object.keys(groups).forEach(function(name){
+    var G=groups[name];
+    function setTab(i){G.cur=i;G.tabs.forEach(function(t){Array.prototype.forEach.call(t.children,function(b,k){b.setAttribute("aria-selected",k===i?"true":"false");});});}
+    function go(car,i,smooth){var c=car.children[i]; if(!c)return; car.scrollTo({left:c.offsetLeft-(car.clientWidth-c.clientWidth)/2,behavior:smooth?"smooth":"auto"});}
+    function all(i,except){G.cars.forEach(function(car){if(car!==except)go(car,i,false);});}
+    function unlockLater(){clearTimeout(G.timer);G.timer=setTimeout(function(){G.lock=false;},500);}
+    G.tabs.forEach(function(t){Array.prototype.forEach.call(t.children,function(b,k){
+      b.addEventListener("click",function(){G.lock=true;setTab(k);G.cars.forEach(function(car){go(car,k,true);});unlockLater();});
+    });});
+    G.cars.forEach(function(car){
       var t=null;
       car.addEventListener("scroll",function(){
-        if(lock) return;
-        clearTimeout(t);
+        if(G.lock)return; clearTimeout(t);
         t=setTimeout(function(){
-          var mid=car.scrollLeft+car.clientWidth/2, best=0, bd=1e9;
-          Array.prototype.forEach.call(car.children,function(c,k){
-            var d=Math.abs(c.offsetLeft+c.clientWidth/2-mid); if(d<bd){bd=d;best=k;}
-          });
-          if(best!==cur){
-            lock=true; setTab(best); all(best,car);
-            clearTimeout(timer); timer=setTimeout(function(){lock=false;},600);
-          }
+          var mid=car.scrollLeft+car.clientWidth/2,best=0,bd=1e9;
+          Array.prototype.forEach.call(car.children,function(c,k){var d=Math.abs(c.offsetLeft+c.clientWidth/2-mid);if(d<bd){bd=d;best=k;}});
+          if(best!==G.cur){G.lock=true;setTab(best);all(best,car);unlockLater();}
         },90);
       },{passive:true});
     });
   });
 
-  /* ---------- lightbox: tap a figure to enlarge and pan ---------- */
+  /* ---------- lightbox ---------- */
   var lb=document.getElementById("lb"), lbi=lb.querySelector("img"), lbx=document.getElementById("lbx");
-  function openLb(src){lbi.src=src;lb.classList.add("on");lbx.classList.add("on");lb.scrollTop=0;lb.scrollLeft=0;document.body.style.overflow="hidden";}
-  function closeLb(){lb.classList.remove("on");lbx.classList.remove("on");lbi.removeAttribute("src");document.body.style.overflow="";}
-  Array.prototype.forEach.call(document.querySelectorAll(".fig img"),function(im){
-    im.parentNode.addEventListener("click",function(){openLb(im.currentSrc||im.src);});
+  function openLb(src){lbi.src=src;lb.classList.add("on");lbx.classList.add("on");lb.scrollTop=0;lb.scrollLeft=0;}
+  function closeLb(){lb.classList.remove("on");lbx.classList.remove("on");lbi.removeAttribute("src");}
+  Array.prototype.forEach.call(document.querySelectorAll(".zoom"),function(z){
+    z.addEventListener("click",function(e){e.stopPropagation();var im=z.parentNode.querySelector("img");openLb(im.currentSrc||im.src);});
   });
   lbx.addEventListener("click",closeLb);
-  document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLb();});
 
   /* ---------- before / after brain slider ---------- */
   var S={
-    a:{b:"assets/brain_a_before.png",a:"assets/brain_a_after.png",c:"assets/cbar_a.png",h:"Right hemisphere, lateral view"},
-    b:{b:"assets/brain_b_before.png",a:"assets/brain_b_after.png",c:"assets/cbar_b.png",h:"Right hemisphere, lateral view"},
-    c:{b:"assets/brain_c_before.png",a:"assets/brain_c_after.png",c:"assets/cbar_c.png",h:"Left hemisphere, lateral view"}
+    a:{b:"assets/brain_a_before.png",a:"assets/brain_a_after.png",c:"assets/cbar_a.png",h:"right hemisphere"},
+    b:{b:"assets/brain_b_before.png",a:"assets/brain_b_after.png",c:"assets/cbar_b.png",h:"right hemisphere"},
+    c:{b:"assets/brain_c_before.png",a:"assets/brain_c_after.png",c:"assets/cbar_c.png",h:"left hemisphere"}
   };
   var cmp=document.getElementById("cmp"), rng=document.getElementById("rng"), touched=false;
   function setP(v){cmp.style.setProperty("--p",v+"%");}
   rng.addEventListener("input",function(){touched=true;setP(rng.value);});
-  Array.prototype.forEach.call(document.querySelectorAll(".brain-tabs button"),function(btn){
+  Array.prototype.forEach.call(document.querySelectorAll("#btabs button"),function(btn){
     btn.addEventListener("click",function(){
       var k=btn.getAttribute("data-s");
-      Array.prototype.forEach.call(document.querySelectorAll(".brain-tabs button"),function(x){x.setAttribute("aria-selected",x===btn?"true":"false");});
-      document.getElementById("imgBefore").src=S[k].b;
-      document.getElementById("imgAfter").src=S[k].a;
-      document.getElementById("cbar").src=S[k].c;
-      document.getElementById("hemi").textContent=S[k].h;
+      Array.prototype.forEach.call(document.querySelectorAll("#btabs button"),function(x){x.setAttribute("aria-selected",x===btn?"true":"false");});
+      document.getElementById("imgBefore").src=S[k].b; document.getElementById("imgAfter").src=S[k].a;
+      document.getElementById("cbar").src=S[k].c; document.getElementById("hemi").textContent=S[k].h;
     });
   });
-  var reduce=false;
-  try{reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}
+  var brainPage=document.querySelector('.page[data-id="brain"]'), swept=false;
+  var reduce=false; try{reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}
   if("IntersectionObserver" in window && !reduce){
-    var done=false;
-    new IntersectionObserver(function(es,ob){
+    new IntersectionObserver(function(es){
       es.forEach(function(e){
-        if(e.isIntersecting && !done && !touched){
-          done=true; ob.disconnect();
-          var t0=null, dur=2600;
+        if(e.isIntersecting && !swept && !touched){
+          swept=true; var t0=null,dur=2600;
           (function step(ts){
-            if(touched) return;
-            if(t0===null) t0=ts;
-            var t=Math.min(1,(ts-t0)/dur);
-            var v=50+38*Math.sin(t*Math.PI*2)*(1-t*0.2);
-            rng.value=v; setP(v);
-            if(t<1) requestAnimationFrame(step); else {rng.value=50;setP(50);}
+            if(touched)return; if(t0===null)t0=ts;
+            var t=Math.min(1,(ts-t0)/dur), v=50+38*Math.sin(t*Math.PI*2)*(1-t*0.2);
+            rng.value=v;setP(v); if(t<1)requestAnimationFrame(step); else {rng.value=50;setP(50);}
           })(performance.now());
         }
       });
-    },{threshold:0.6}).observe(cmp);
-  }
-  var vid=document.getElementById("vid");
-  if(vid && "IntersectionObserver" in window){
-    new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if(e.isIntersecting){var p=vid.play(); if(p&&p.catch)p.catch(function(){});} else {vid.pause();}
-      });
-    },{threshold:0.5}).observe(vid);
+    },{root:feed,threshold:0.7}).observe(brainPage);
   }
 })();
 </script>
