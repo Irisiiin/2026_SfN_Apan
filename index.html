@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Listening and looking in real-world conversation · Xinran Yu</title>
-<meta name="description" content="Intracranial EEG from three patients during natural conversation: APAN #124 and SfN posters, Xinran Yu, Ghuman lab, University of Pittsburgh.">
+<title>Who Speaks When and Audiovisual Analysis · Xinran Yu</title>
+<meta name="description" content="Who Speaks When and Audiovisual Analysis in Un-scripted, Real-World Social Interactions. Xinran Yu, Laboratory of Cognitive Neurodynamics (LCND), University of Pittsburgh.">
 <style>
 :root{
   --bg:#f6f7f9; --card:#ffffff; --ink:#15181d; --muted:#5b6470; --line:#e2e5ea;
@@ -94,17 +94,20 @@ footer{margin-top:40px;color:var(--muted);font-size:13px;text-align:center}
 
 <header>
   <p class="eyebrow">APAN 2026 · SfN Neuroscience 2026</p>
-  <h1>Listening and looking in real-world conversation</h1>
-  <p class="byline">Xinran Yu, Arish Alreja, Michael J. Ward, Taylor Abel, Avniel Singh Ghuman<br>University of Pittsburgh · University of California, Los Angeles</p>
-  <p class="lead">Intracranial EEG from three patients during natural conversation. Two posters, one dataset.</p>
-  <p class="link-line">Poster 1 asks <b>who is speaking</b>. Poster 2 adds <b>where the patient is looking</b>.</p>
+  <h1>Who Speaks When and Audiovisual Analysis in Un-scripted, Real-World Social Interactions</h1>
+  <p class="byline">Xinran Yu, Arish Alreja, Michael J. Ward, Taylor Abel, Avniel Singh Ghuman<br>PI: Avniel Ghuman<br>Laboratory of Cognitive Neurodynamics (LCND), University of Pittsburgh · University of California, Los Angeles</p>
 </header>
+<section id="video" style="margin:14px 0 0">
+  <video id="vid" controls autoplay playsinline muted loop preload="auto" poster="assets/demo_gaze_ieeg_poster.jpg" style="box-shadow:var(--shadow)">
+    <source src="assets/demo_gaze_ieeg.mp4" type="video/mp4">
+  </video>
+  <p class="cap" style="margin-top:8px">Patient’s eye-tracking view (left), audio (top) and brain activity of every electrode (right). The conversation partner is a member of the research team.</p>
+</section>
 
 <nav class="top" aria-label="Sections">
   <a href="#apan">APAN poster</a>
   <a href="#sfn">SfN poster</a>
   <a href="#brain">Brain maps</a>
-  <a href="#video">Video</a>
   <a href="#links">Links</a>
   <a href="#contact">Contact</a>
 </nav>
@@ -322,20 +325,10 @@ footer{margin-top:40px;color:var(--muted);font-size:13px;text-align:center}
   </div>
 </section>
 
-<section id="video" class="more-title" style="margin-top:34px">
-  <h2>What the patient sees, and what the brain does</h2>
-  <div class="slide">
-    <video id="vid" controls playsinline muted loop preload="metadata" poster="assets/demo_gaze_ieeg_poster.jpg">
-      <source src="assets/demo_gaze_ieeg.mp4" type="video/mp4">
-    </video>
-    <p class="cap"><b>Left:</b> world camera with face / person / monitor boxes; the orange cross marks the gaze. <b>Top:</b> audio waveform. <b>Right:</b> iEEG voltage and broadband activity of every electrode, ±500 ms. The conversation partner is a member of the research team.</p>
-  </div>
-</section>
-
 <section id="links" style="margin-top:34px">
   <h2>Read more</h2>
   <div class="slide rows">
-    <a class="row" href="https://www.lcnd.org/"><div class="t">Lab website</div><div class="d">lcnd.org</div></a>
+    <a class="row" href="https://www.lcnd.org/"><div class="t">Laboratory of Cognitive Neurodynamics (LCND)</div><div class="d">lcnd.org</div></a>
     <a class="row" href="https://arxiv.org/abs/2505.08831"><div class="t">Neural Encoding of Real World Face Perception</div><div class="d">Alreja, Ward, Parker, Richardson, Morency, Abel &amp; Ghuman · in press · arXiv preprint</div></a>
     <a class="row" href="https://doi.org/10.3758/s13428-022-01882-9"><div class="t">A New Paradigm for Investigating Real-World Social Behavior and its Neural Underpinnings</div><div class="d">Alreja et al. · Behavior Research Methods, 2022</div></a>
     <a class="row" href="posters/SfN_APAN_posters_2026.pdf"><div class="t">Both posters (PDF)</div><div class="d">Page 1: APAN · Page 2: SfN</div></a>
@@ -345,7 +338,7 @@ footer{margin-top:40px;color:var(--muted);font-size:13px;text-align:center}
 <section id="contact" style="margin-top:34px">
   <h2>Contact</h2>
   <div class="slide">
-    <p style="margin:0"><b>Xinran Yu</b><br>Ghuman lab, University of Pittsburgh</p>
+    <p style="margin:0"><b>Xinran Yu</b><br>Laboratory of Cognitive Neurodynamics (LCND)<br>PI: Avniel Ghuman · University of Pittsburgh</p>
     <p style="margin:12px 0 0"><a class="btn" href="mailto:xiy185@pitt.edu">xiy185@pitt.edu</a></p>
   </div>
 </section>
