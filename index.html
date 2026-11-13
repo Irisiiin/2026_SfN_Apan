@@ -81,7 +81,10 @@ ul.b.sm li{font-size:16px;margin-bottom:8px}
 .up svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;margin-top:-6px}
 .up svg:first-child{margin-top:0}
 @keyframes breathe{0%,100%{opacity:.12;transform:translateY(5px)}50%{opacity:.95;transform:translateY(-3px)}}
-.tip{position:absolute;left:66px;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);font-size:12.5px;color:var(--heart);animation:breathe 2.4s ease-in-out infinite;pointer-events:none;white-space:nowrap}
+.cnt{font-size:15px;font-weight:700;color:#fff;min-width:24px;margin-left:4px;opacity:0;transition:opacity .4s}
+.cnt.ok{opacity:.9}
+.lk{display:flex;align-items:center}
+.tip{position:absolute;left:118px;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);font-size:12.5px;color:var(--heart);animation:breathe 2.4s ease-in-out infinite;pointer-events:none;white-space:nowrap}
 .bigup{display:flex;flex-direction:column;align-items:center;margin-top:28px;color:var(--ink);animation:breathe 2.4s ease-in-out infinite}
 .bigup span{font-weight:700;letter-spacing:.04em;margin-bottom:2px}
 .bigup svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;margin-top:-10px}
@@ -428,15 +431,27 @@ ul.b.sm li{font-size:16px;margin-bottom:8px}
   function isLiked(id){return likes.indexOf(id)>=0;}
   function paintLikes(){
     pages.forEach(function(p){var b=p.querySelector(".like"); if(b){b.classList.toggle("on",isLiked(p.getAttribute("data-id")));b.setAttribute("aria-pressed",isLiked(p.getAttribute("data-id"))?"true":"false");}});
-    document.querySelector("#likecount b").textContent=likes.length;
+    if(!totals) document.querySelector("#likecount b").textContent=likes.length;
     var nudge=likes.length===0;
     Array.prototype.forEach.call(document.querySelectorAll(".like"),function(b){b.classList.toggle("nudge",nudge);});
     Array.prototype.forEach.call(document.querySelectorAll(".tip"),function(t){t.style.display=nudge?"":"none";});
   }
+  var totals=null; /* everyone's likes per page, filled by Firebase when reachable */
+  function paintCounts(){
+    if(!totals) return;
+    var sum=0;
+    pages.forEach(function(p){
+      var id=p.getAttribute("data-id"), c=p.querySelector(".cnt"), n=Math.max(0,totals[id]||0); sum+=n;
+      if(c){c.textContent=n;c.classList.add("ok");}
+    });
+    document.querySelector("#likecount").innerHTML="\u2665 <b>"+sum+"</b> total";
+  }
+  window.sfnOnCounts=function(map){totals=map;paintCounts();};
   function toggleLike(id,forceOn){
-    var i=likes.indexOf(id);
-    if(i>=0){ if(forceOn) return; likes.splice(i,1);} else { likes.push(id); if(navigator.vibrate){try{navigator.vibrate(12);}catch(e){}} }
+    var i=likes.indexOf(id), d;
+    if(i>=0){ if(forceOn) return; likes.splice(i,1); d=-1;} else { likes.push(id); d=1; if(navigator.vibrate){try{navigator.vibrate(12);}catch(e){}} }
     saveLikes(likes); paintLikes();
+    if(window.sfnCloud){try{window.sfnCloud.bump(id,d);}catch(e){}}
   }
 
   /* ---------- toast + copy ---------- */
@@ -466,10 +481,12 @@ ul.b.sm li{font-size:16px;margin-bottom:8px}
     if(!last && idx>0){mid.className="up";mid.innerHTML=CHEV+CHEV;}
     var sh=document.createElement("button"); sh.className="ibtn"; sh.type="button"; sh.setAttribute("aria-label","Copy link to this website"); sh.innerHTML=SHARE;
     sh.addEventListener("click",function(e){e.stopPropagation();shareLink();});
-    bar.appendChild(like); bar.appendChild(mid); bar.appendChild(sh); p.appendChild(bar);
+    var lk=document.createElement("div"); lk.className="lk"; var cnt=document.createElement("span"); cnt.className="cnt"; cnt.textContent="0";
+    lk.appendChild(like); lk.appendChild(cnt);
+    bar.appendChild(lk); bar.appendChild(mid); bar.appendChild(sh); p.appendChild(bar);
     if(idx<2){var tip=document.createElement("div");tip.className="tip";tip.textContent="Tap ♥ to like";p.appendChild(tip);}
   });
-  paintLikes();
+  paintLikes(); paintCounts();
 
   /* ---------- double-tap to like ---------- */
   var lastTap=0, lastX=0, lastY=0;
@@ -591,6 +608,17 @@ ul.b.sm li{font-size:16px;margin-bottom:8px}
     },{root:feed,threshold:0.7}).observe(brainPage);
   }
 })();
+</script>
+<script type="module">
+/* Shared like totals (Firebase Firestore). If it cannot load, the site still works with local likes. */
+try{
+  const A=await import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js");
+  const F=await import("https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js");
+  const app=A.initializeApp({apiKey:"AIzaSyDkpDQBCfXGmYqJSxWw7vzUIZ-P2UM4l9A",authDomain:"sfn-apan-likes.firebaseapp.com",projectId:"sfn-apan-likes",storageBucket:"sfn-apan-likes.firebasestorage.app",messagingSenderId:"521772980289",appId:"1:521772980289:web:65b39371699f52f9958ec0"});
+  const db=F.getFirestore(app);
+  window.sfnCloud={bump:(id,d)=>F.setDoc(F.doc(db,"likes",id),{n:F.increment(d)},{merge:true}).catch(()=>{})};
+  F.onSnapshot(F.collection(db,"likes"),snap=>{const m={};snap.forEach(x=>{m[x.id]=x.data().n||0;});window.sfnOnCounts&&window.sfnOnCounts(m);},()=>{});
+}catch(e){}
 </script>
 </body>
 </html>
